@@ -1,0 +1,34 @@
+{{define "content"}}
+<h1>PSN連携情報取得結果</h1>
+
+{{if .PSNConnection}}
+<div class="result-card">
+	<h2>PlayStation Network 連携情報</h2>
+	<p><strong>PSN ID:</strong> <span class="psn-id">{{.PSNConnection.ID}}</span></p>
+	<p><strong>ユーザー名:</strong> {{.PSNConnection.Name}}</p>
+	<p><strong>認証済み:</strong> {{if .PSNConnection.Verified}}はい
+		{{else}}いいえ{{end}}
+	</p>
+</div>
+{{else}}
+	<div class="error-card">
+		<h2>PlayStation Network連携が見つかりません</h2>
+		<p>Discordアカウントにて事前にPlayStation Networkとの連携を行ってください。</p>
+		<p>Discord → 設定 → 接続 から PlayStation Network を連携できます。</p>
+	</div>
+	{{end}}
+
+	{{if .AllConnections}}
+	<div class="result-card">
+		<h2>すべての連携サービス</h2>
+		{{range .AllConnections}}
+		<div class="connection-item">
+			<strong>{{.Type}}</strong>: {{.Name}}
+			{{if .Verified}}<span style="color: #00d166;">✓ 認証済み</span>{{end}}
+		</div>
+		{{end}}
+	</div>
+	{{end}}
+
+	<a href="/" class="back-button">← トップに戻る</a>
+	{{end}}
